@@ -1,0 +1,17 @@
+{% extends "network/layout.html" %}
+{% load static %}
+
+{% block body %}
+<div id="edit-div" data-postid="{{ post_id }}" class="container">
+  <form id="edit-form">
+    {% csrf_token %}
+    <textarea id="edit-ta" name="edit-field" rows="8" cols="80">{{ post_text }}</textarea>
+    <button id="edit-btn" class="btn btn-primary" type="submit" name="button">Save Edit</button>
+  </form>
+
+</div>
+{% endblock %}
+
+{% block script %}
+<script type="module" src="{% static 'network/edit.js' %}"></script>
+{% endblock %}

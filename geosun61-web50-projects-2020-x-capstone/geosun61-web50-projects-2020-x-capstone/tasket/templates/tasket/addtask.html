@@ -1,0 +1,33 @@
+{% extends "tasket/layout.html" %}
+{% load static %}
+
+{% block title%}Form Test{% endblock %}
+{% block pageheader%}{{request.user.username}}'s Form Page{% endblock %}
+
+{% block body %}
+<div id="msgExists" class="alert alert-info" role="alert">
+  Message exists
+</div>
+<div id="message1" class="alert alert-success" role="alert">
+  Days and Tasks successfully added redirecting to home after 5 seconds
+</div>
+
+<form class="task-form">
+  {% csrf_token %}
+  <div class="form-group">
+    <input id='date_field' type="date" name="date" required>
+  </div>
+
+  <button id="addtask_btn" class="btn btn-primary" type="button" name="add_task">Add a Task</button>
+  <hr>
+  <div id="newtasksdiv" class="form-group">
+    <input class="form-control tasks" type="text" name="task" placeholder="Enter the task" required>
+  </div>
+
+  <input id="submit_tasks_btn" class="btn btn-secondary" type="button" value="Save">
+</form>
+{% endblock %}
+
+{% block script %}
+<script type="module" src="{% static 'tasket/addtask.js' %}"></script>
+{% endblock %}

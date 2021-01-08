@@ -1,0 +1,44 @@
+
+//variable
+$pad: 10px;
+
+//inheritance
+
+%heading {
+  padding-top: $pad;
+  padding-bottom: $pad;
+  margin-bottom: 35px;
+  text-align: center;
+  background-color: black;
+}
+
+%heading1 {
+  color: white;
+  margin-left: auto;
+  margin-right: auto;
+  text-indent: 37px;
+}
+
+%menu {
+  list-style-type: none;
+  overflow: hidden;
+  position: relative;
+  display: inline;
+  padding-left: $pad;
+  padding-right: $pad;
+  margin-left: auto;
+  margin-right: auto;
+}
+//inheritance
+
+header {
+  @extend %heading;
+
+  h1 {
+    @extend %heading1;
+  }
+
+  ul#menu li {
+    @extend %menu;
+  }
+}

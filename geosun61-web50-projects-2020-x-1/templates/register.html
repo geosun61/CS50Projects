@@ -1,0 +1,51 @@
+{% extends "layout.html" %}
+
+{% block title %}
+  Register
+{% endblock %}
+
+{% block navBar %}
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="/">Bookworm</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+    <div class="navbar-nav">
+      <a class="nav-item nav-link" href="/">Home</a>
+      <a class="nav-item nav-link" href="/login">Login</a>
+      <a class="nav-item nav-link active" href="/register">Register <span class="sr-only">(current)</span></a>
+      <a class="nav-item nav-link disabled" href="#">Search</a>
+    </div>
+  </div>
+</nav>
+{% endblock %}
+
+{% block body %}
+    <h3>Register</h3>
+    <div class="row">
+
+      <div class="col">
+        <!--Login form-->
+        <form method="POST">
+
+          <div class="form-group">
+            <label for="userReg">Username</label>
+            <input type="text" class="form-control" id="userReg" name="userReg" aria-describedby="emailHelp" placeholder="Enter username" required>
+          </div>
+
+          <div class="form-group">
+            <label for="passReg1">Create Password</label>
+            <input type="password" class="form-control" id="passReg1" name="passReg1" placeholder="Create password" required>
+          </div>
+
+          <div class="form-group">
+            <label for="passReg2">Re-enter Password</label>
+            <input type="password" class="form-control" id="passReg2" name="passReg2" placeholder="Password" required>
+          </div>
+
+          <button type="submit">Register user</button>
+        </form>
+      </div>
+    </div>
+{% endblock %}

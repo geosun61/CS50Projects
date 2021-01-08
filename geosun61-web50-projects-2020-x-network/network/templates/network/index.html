@@ -1,0 +1,93 @@
+{% extends "network/layout.html" %}
+{% load static %}
+
+{% block body %}
+
+<div id="allposts-view">
+  <!--start of allposts-view-->
+  <h1 class="headers">All Posts</h1>
+  <div class="container">
+    <!--start of bootstrap container-->
+    {% if message %}
+    <div class="alert alert-success" role="alert">{{ message }}</div>
+    {% endif %}
+    <div id="newpost-div" class="border rounded-lg">
+      <!--start of newpost-div -->
+      <h4>New Post</h4>
+
+      <form id="newpost-form">
+        {% csrf_token %}
+        <textarea class="form-control" id="newpost-body" placeholder="Type what you want to post..."></textarea>
+        <input type="submit" id="newpost-submit" class="btn btn-primary" value="Post" />
+      </form>
+
+    </div>
+    <!--end of newpost-div-->
+    <hr>
+  </div>
+  <!--end of bootstrap container-->
+</div>
+<!--end of allposts-view-->
+
+<div id="posts-view">
+  <div class="container">
+
+    {% for post in page_obj %}
+    <!-- For loop for posts -->
+    <div class="card border rounded-lg">
+      <div id="post{{ post.id }}" class="post">
+
+        <!-- Link to profile -->
+        <div class="card-header post-header">
+          <a data-postid="{{ post.id }}" href="{% url 'editpost' post.id %}" class="edit_link">
+            Edit
+          </a>
+          <a class="proflink" href="{% url 'profile' user_id=post.poster.id %}">
+            <h5 class="usernames">{{ post.poster }}</h5>
+          </a>
+        </div>
+
+
+        <div class="card-body">
+          <span class="post-body">{{ post.body }}</span>
+          <hr>
+
+          <span data-id="{{ post.id }}" class="likes">
+            {% if user in post.liked_by.all %}
+            <i id ="liked_btn" class="fas fa-heart like_btn"></i>
+            {% else %}
+            <i id ="notliked_btn" class="far fa-heart like_btn"></i>
+            {% endif%}
+            <span class="likeNo">{{ post.liked_by.count }}</span> Likes
+          </span>
+          
+          <span class="timestamp">{{ post.timestamp }}</span>
+        </div>
+      </div>
+    </div>
+    <br>
+    <!-- end of For loop for posts -->
+    {% endfor %}
+
+    <nav aria-label="...">
+      <ul class="pagination">
+        {% if page_obj.has_previous %}
+        <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }}">Previous</a></li>
+        {% endif %}
+
+        {% if page_obj.has_next %}
+        <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}">Next</a></li>
+        {% endif %}
+      </ul>
+    </nav>
+
+  </div>
+  <br>
+</div>
+
+{% endblock %}
+
+{% block script %}
+<script type="module" src="{% static 'network/index.js' %}"></script>
+<script src="https://kit.fontawesome.com/897470de37.js" crossorigin="anonymous"></script>
+{% endblock %}

@@ -1,0 +1,48 @@
+{% extends "tasket/layout.html" %}
+{% load static %}
+
+{% block title%}Home{% endblock %}
+{% block pageheader%}{{request.user.username}}'s Home{% endblock %}
+
+{% block body %}
+{% if message %}
+  {{ message }}
+{% endif %}
+
+Hello, {{ request.user.username }}! Welcome to your Homepage.
+
+<br>
+<br>
+<h4>List of Tasks</h4>
+
+{% if days_obj %}
+<br>
+<h6>Order By</h6>
+  <form class="radioform">
+    <div id="orderby-radio-grp" class="btn-group btn-group-toggle" data-toggle="buttons">
+      <label class="btn btn-secondary" for="old-datebtn" checked>
+        <input type="radio" name="options" id="old-datebtn" value="date"> Oldest Date </input>
+      </label>
+      <label class="btn btn-secondary" for="latest-datebtn">
+        <input type="radio" name="options" id="latest-datebtn" value="-date"> Latest Date </input>
+      </label>
+      <label class="btn btn-secondary" for="date-createdbtn">
+        <input type="radio" name="options" id="date-createdbtn" value="datetime_created"> Date Created </input>
+      </label>
+
+    </div>
+  </form>
+
+
+<hr>
+{% endif %}
+
+<div id="days-view" class="row">
+  {% csrf_token %}
+<table id="days-table" class="table table-striped"> </table>
+</div>
+<br>
+{% endblock %}
+{% block script %}
+<script type="module" src="{% static 'tasket/index.js' %}"></script>
+{% endblock %}

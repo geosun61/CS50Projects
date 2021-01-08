@@ -1,0 +1,46 @@
+{% extends "layout.html" %}
+
+{% block title %}
+  Login
+{% endblock %}
+
+{% block navBar %}
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="/">Bookworm</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+    <div class="navbar-nav">
+      <a class="nav-item nav-link" href="/">Home</a>
+      <a class="nav-item nav-link active" href="/login">Login<span class="sr-only">(current)</span></a>
+      <a class="nav-item nav-link" href="/register">Register</a>
+      <a class="nav-item nav-link disabled" href="#">Search</a>
+    </div>
+  </div>
+</nav>
+{% endblock %}
+
+{% block body %}
+
+    <h3>Login</h3>
+    <div class="row">
+
+      <div class="col">
+        <!--Login form-->
+        <form method="post">
+
+          <div class="form-group">
+            <label for="username">Username</label>
+            <input type="text" class="form-control" id="usernamelogin" aria-describedby="emailHelp" placeholder="Enter username" name="usernamelogin" required>
+          </div>
+          <div class="form-group">
+            <label for="passwordlogin">Password</label>
+            <input type="password" class="form-control" id="passwordlogin" placeholder="Password" name="passwordlogin" required>
+          </div>
+
+          <button type="submit">Login</button>
+        </form>
+      </div>
+    </div>
+{% endblock %}

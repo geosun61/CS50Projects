@@ -1,0 +1,37 @@
+header {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  margin-bottom: 35px;
+  text-align: center;
+  background-color: black;
+}
+
+header h1 {
+  color: white;
+  margin-left: auto;
+  margin-right: auto;
+  text-indent: 37px;
+}
+
+header ul#menu li {
+  list-style-type: none;
+  overflow: hidden;
+  position: relative;
+  display: inline;
+  padding-left: 10px;
+  padding-right: 10px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+body h4 {
+  color: rgba(0, 26, 120, 0.75);
+}
+body .container table tr .senfunc {
+  font-size: 15px;
+}
+body .container table tr .senImg {
+  width: 200px;
+}
+
+/*# sourceMappingURL=capstone.css.map */

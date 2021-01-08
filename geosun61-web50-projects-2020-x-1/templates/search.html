@@ -1,0 +1,94 @@
+{% extends "layout.html" %}
+
+{% block title %}
+Search
+{% endblock %}
+
+{% block navBar %}
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="/">Bookworm</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+    <div class="navbar-nav">
+      <a class="nav-item nav-link" href="/">Home</a>
+      <a class="nav-item nav-link" href="/logout">Logout</a>
+      <a class="nav-item nav-link active" href="/search">Search<span class="sr-only">(current)</span></a>
+    </div>
+  </div>
+</nav>
+{% endblock %}
+
+{% block body %}
+<br>
+  <h1>Search for a book</h1>
+
+  <div class="row">
+
+    <div class="col">
+      <!--Search form-->
+      <form method="post">
+
+        <!--Search bar-->
+        <div class="form-group">
+          <input type="text" class="form-control" id="searchBar" placeholder="Search for ISBN, author or title" name="searchBar" required>
+        </div>
+        <!--Search button-->
+        <button type="submit">Search</button>
+
+
+        <!--radio buttons for search options-->
+        <input type="radio" id="bookidradio" name="optionradio" value="id" required>
+        <label for="isbnradio">Book ID #</label>
+
+        <input type="radio" id="isbnradio" name="optionradio" value="isbn" required>
+        <label for="isbnradio">ISBN</label>
+
+        <input type="radio" id="authorradio" name="optionradio" value="author" required>
+        <label for="authorradio">Author</label>
+
+        <input type="radio" id="titleradio" name="optionradio" value="title" required>
+        <label for="title">Title</label>
+
+      </form>
+    </div>
+  </div>
+
+  <br>
+
+  {% if bookdata is none or bookdata == [] %}
+    <p>0 matches found</p>
+    <br>
+  {% endif %}
+
+    <table class="table table-bordered table-striped table-dark">
+
+      <thead>
+        <tr>
+          <th scope="col">Book ID #</th>
+          <th scope="col">ISBN</th>
+          <th scope="col">Title</th>
+          <th scope="col">Author</th>
+          <th scope="col">Year Published</th>
+        </tr>
+      </thead>
+
+      <tbody>
+
+
+        {% for book in bookdata %}
+
+              <tr>
+              <th scope="row">{{ book.id }}</th>
+              <td><a href="{{ url_for('book',bookid=book.id)}}"> {{ book.isbn }} </a></td>
+              <td>{{ book.title }}</td>
+              <td>{{ book.author }}</td>
+              <td>{{ book.year }}</td>
+            </tr>
+        {% endfor %}
+      </tbody>
+
+    </table>
+
+{% endblock %}

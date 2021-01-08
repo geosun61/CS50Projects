@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <title>George's Capstone Project</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" href=".\cssout\capstone.css">
+
+  <!-- Media style if max width-->
+  <style>
+    @media (max-width:800px) {
+      .senImg {
+        display: none;
+      }
+    }
+  </style>
+
+</head>
+<header>
+  <h1>Capstone Project</h1>
+  <ul id="menu">
+    <li> <a href="homepage.html">Homepage</a></li>
+    <li><a href="capstone.html">Capstone</a></li>
+    <li><a href="resume.html">Experience</a></li>
+    <li><a href="hobbies.html">Hobbies</a></li>
+  </ul>
+</header>
+
+<body>
+  <div class="container">
+
+    <h4><b>About My Capstone Project</b></h4>
+    <br>
+    <p>
+      In this section of the website I will go over the final capstone project I worked on last semester.
+      The capstone project uses a Raspberry Pi 4, Android App and a Firebase database. The Raspberry Pi
+      controls the sensors/effectors for the project which are an <b>IR Break Beam Sensor</b>,
+      <b>VCNL 4010</b>, <b>HD Camera</b>, and <b>2 Servo-Motors</b>. All sensors were programmed with
+      Python on the Raspberry Pi. The Android app was programmed in the Android Studio IDE with Java and XML.
+      The Firebase database provided by Google was used to store data entered from the Android app
+      which then the data can be pulled from there and used on the Raspberry Pi. Each sensor and sensor is
+      placed on the final PCB design which will be shown here at the bottom of the page.
+    </p>
+
+    <!--table for sensor list-->
+
+    <br>
+    <table class="table table-bordered">
+
+      <thead>
+        <tr>
+          <th>Sensor/Effector</th>
+          <th>Function</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td> <img src="img\irBBtest.jpg" alt="IR Break Beam Sensor" class="senImg"><br> <i>IR Break Beam</i> </td>
+          <td class="senfunc">
+            The IR Break Beam for this project is used as and entry/exit. The IR Break Beam
+            sensor has two parts one is a receiver and the other is a transmitter. The
+            receiver has 3 wires power, ground and output. Once the receiver receives an
+            IR bream it will send a digital output. The digital output in this project is
+            used to show if an object has approached the entry/exit.
+          </td>
+        </tr>
+
+        <tr>
+          <td><img src="img\vcnltest.jpg" alt="vcnl" class="senImg"><br> <i>VCNL4010</i></td>
+          <td class="senfunc">
+            VCNL4010 is placed a parking spot to detect if a car is parked or not in the spot.
+            The VCNL sensor is an I2C device that detects if an object approaches the sensor
+            and reports on the distance of the object form the sensor. The sensor was programmed
+            to send data to the Firebase database to report on if a car has parked in the parking
+            spot. It would send a boolean value if a car has parked in the spot or not.
+          </td>
+        </tr>
+
+        <tr>
+          <td> <img src="img\servomotor.jpg" alt="servomotor" class="senImg"><br> <i>Servo-Motor</i></td>
+          <td class="senfunc">The 2 servomotors were used as a entry and exit barriers. The servo motor
+            Python script was activated once the IR Break Beam code sent a boolean value if an object has
+            approached the entance. The servo motor had a barrier attached to its shaft and would lift the
+            barrier once the license plate detection is true.
+          </td>
+        </tr>
+        <tr>
+          <td> <img src="img\yoluke hd camera.jpg" alt="HD Camera" class="senImg"><br><i>HD Camera</i> </td>
+          <td class="senfunc">
+            The HD Camera is used at the entrance at the parking lot to take a picture of the license plate
+            of the model cars. The script ot take a picture is activated when the IR Break Beam sensor detects
+            if the beam is broken. A picture is taken and is analyzed by an image recognition program. Once the
+            image recognition is done it will send a string value and then it is compared to a value from Firebase.
+            The value from Firebase is entered from our Android app on the Add a Car page where they enter
+            information about their car. If the license plate string from Firebase and image recognition are the
+            same then the car is allowed for entry.
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</body>
+
+</html>

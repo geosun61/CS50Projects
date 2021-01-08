@@ -1,0 +1,81 @@
+{% extends "network/layout.html" %}
+{% load static %}
+
+{% block body %}
+<div class="container">
+
+  <div class="user_div card">
+    <h1 id="user_name" data-username="{{ user_obj.username }}" class="ph card-header">{{ user_obj.username }}'s Profile Details</h1>
+    {% if request.user != user_obj %}
+    <button class="btn btn-secondary" id="follow_butt" type="button" name="follow">
+      {% if following %}
+      Unfollow {{ user_obj.username }}
+      {% else %}
+      Follow {{ user_obj.username }}
+      {% endif %}
+    </button>
+    {% endif %}
+    <div class="ph card-body">
+      <div class="ph">
+        <span class="ph-details"><b>Following:</b> {{ following_num }} account(s)</span>
+        <span class="ph-details"><b> No. of Posts:</b> {{ posts_num }}</span>
+      </div>
+    </div>
+  </div>
+  <hr>
+  <h3>{{ user_obj.username }}'s Posts</h3>
+  <!-- For loop for posts -->
+  {% for post in page_obj %}
+  <div class="card border rounded-lg">
+    <div id="post{{ post.id }}" class="post">
+      <!--Start of post-->
+
+      <div class="card-header post-header">
+        <a data-postid="{{ post.id }}" href="{% url 'editpost' post.id %}" class="edit_link">
+          Edit
+        </a>
+        <h5 class="usernames">{{ post.poster }}</h5>
+      </div>
+
+      <div class="card-body">
+        <span class="post-body">{{ post.body }}</span>
+        <hr>
+        <span data-id="{{ post.id }}" class="likes">
+          {% if user in post.liked_by.all %}
+          <i id ="liked_btn" class="fas fa-heart like_btn"></i>
+          {% else %}
+          <i id ="notliked_btn" class="far fa-heart like_btn"></i>
+          {% endif%}
+          <span class="likeNo">{{ post.liked_by.count }}</span> Likes
+        </span>
+        <span class="timestamp">{{ post.timestamp }}</span>
+      </div>
+
+    </div>
+    <!--end of post-->
+  </div>
+  <br>
+  {% empty %}
+  <br>
+  <p><i>This user has not posted anything...</i></p>
+  {% endfor %}
+  <!--End of for loop for posts-->
+  <nav aria-label="...">
+    <ul class="pagination">
+      {% if page_obj.has_previous %}
+      <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }}">Previous</a></li>
+      {% endif %}
+
+      {% if page_obj.has_next %}
+      <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}">Next</a></li>
+      {% endif %}
+    </ul>
+  </nav>
+
+</div>
+{% endblock %}
+
+{% block script %}
+<script src="https://kit.fontawesome.com/897470de37.js" crossorigin="anonymous"></script>
+<script type="module" src="{% static 'network/profile.js' %}"></script>
+{% endblock %}

@@ -1,0 +1,61 @@
+{% extends "network/layout.html" %}
+{% load static %}
+
+{% block body %}
+<h1 class="headers">Following Posts</h1>
+
+<div class="container">
+  {% for post in page_obj %}
+  <!-- For loop for posts -->
+  <div class="card border rounded-lg">
+    <div id="post{{ post.id }}" class="post">
+
+      <!-- Link to profile -->
+      <div class="card-header user-prof">
+        <a class="proflink" href="{% url 'profile' post.poster.id %}">
+          <h5 class="username">{{ post.poster }}</h5>
+        </a>
+      </div>
+
+
+      <div class="card-body">
+        <span class="post-body">{{ post.body }}</span>
+        <hr>
+
+        <span data-id="{{ post.id }}" class="likes">
+          {% if user in post.liked_by.all %}
+          <i id ="liked_btn" class="fas fa-heart like_btn"></i>
+          {% else %}
+          <i id ="notliked_btn" class="far fa-heart like_btn"></i>
+          {% endif%}
+          <span class="likeNo">{{ post.liked_by.count }}</span> Likes
+        </span>
+
+        <span class="timestamp">{{ post.timestamp}}</span>
+
+      </div>
+    </div>
+  </div>
+  <br>
+  <!-- end of For loop for posts -->
+  {% endfor %}
+
+  <nav aria-label="...">
+    <ul class="pagination">
+      {% if page_obj.has_previous %}
+      <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }}">Previous</a></li>
+      {% endif %}
+
+      {% if page_obj.has_next %}
+      <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}">Next</a></li>
+      {% endif %}
+    </ul>
+  </nav>
+
+</div>
+<br>
+{% endblock %}
+{% block script %}
+<script src="https://kit.fontawesome.com/897470de37.js" crossorigin="anonymous"></script>
+<script type="module" src="{% static 'network/following.js' %}"></script>
+{% endblock %}

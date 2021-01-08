@@ -1,0 +1,142 @@
+{% extends "layout.html" %}
+
+{% block title %}
+Book {{ book.isbn }}
+{% endblock %}
+
+{% block navBar %}
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="/">Bookworm</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+    <div class="navbar-nav">
+      <a class="nav-item nav-link" href="/">Home</a>
+      <a class="nav-item nav-link" href="/logout">Logout</a>
+      <a class="nav-item nav-link" href="/search">Search</a>
+      <a class="nav-item nav-link active" href="/book/{{ book.id }}">Book {{ book.id }}<span class="sr-only">(current)</span></a>
+    </div>
+  </div>
+</nav>
+{% endblock %}
+
+{% block body %}
+
+<br>
+<h3>Page for {{ book.title }}</h3>
+<hr>
+
+<br>
+
+<table class="table table-bordered table-striped table-dark">
+
+  <thead>
+    <tr>
+      <th scope="col">Book ID #</th>
+      <th scope="col">ISBN</th>
+      <th scope="col">Title</th>
+      <th scope="col">Author</th>
+      <th scope="col">Year Published</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr>
+      <th scope="row">{{ book.id }}</th>
+      <td>{{ book.isbn }}</td>
+      <td>{{ book.title }}</td>
+      <td>{{ book.author }}</td>
+      <td>{{ book.year }}</td>
+    </tr>
+  </tbody>
+</table>
+
+<br>
+<h5>Goodreads Ratings on {{ book.title }}</h5>
+<hr>
+
+<p><b>Goodreads Avg. Rating: </b> {{ grAvgR }}</p>
+
+<p><b>Goodreads No. of Reviews:</b> {{ grRevNo }}</p>
+<br>
+
+
+
+
+<h5>Bookworm User Ratings on {{ book.title }}</h5>
+<hr>
+{% if bwRev is false %}
+<p style="text-indent:20px;">No reviews for this book consider submitting your own review...</p>
+<br>
+{% else %}
+
+<table class="table table-bordered table-striped table-dark">
+  <thead>
+    <tr>
+      <th scope="col">Book ID #</th>
+      <th scope="col">User ID #</th>
+      <th scope="col">Rating</th>
+      <th scope="col">Review</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for review in bwReviews %}
+    <tr>
+      <th scope="row">{{ review.book_id }}</th>
+      <td> {{ review.user_id }}</td>
+      <td>{{ review.rating }}</td>
+      <td>{{ review.review_text }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endif %}
+
+{% if bwUserRev is false %}
+<h5>Write your review for {{ book.title }}</h5>
+<hr>
+
+<form class="reviewForm" method="post">
+  <select class="form-control" name="rating_num" style="width:60px;" required>
+    <option name="rating_1" value="1">1</option>
+    <option name="rating_2" value="2">2</option>
+    <option name="rating_3" value="3">3</option>
+    <option name="rating_4" value="4">4</option>
+    <option name="rating_5" value="5">5</option>
+  </select>
+  <br>
+
+  <div class="input-group">
+    <div class="input-group-prepend">
+      <span class="input-group-text">Write your review</span>
+    </div>
+    <textarea class="form-control" aria-label="Write your review..." name="reviewText" required></textarea>
+  </div>
+  <br>
+  <button type="submit" name="submitRev">Submit Review</button>
+</form>
+<br>
+{% else %}
+<b>You already reviewed this book...</b>
+<br>
+Here is what you said about {{ book.title }}
+<table class="table table-bordered table-striped table-dark">
+  <thead>
+    <tr>
+      <th scope="col">Rating</th>
+      <th scope="col">Review</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>{{ curUbwRev.rating }}</td>
+      <td>{{ curUbwRev.review_text }}</td>
+    </tr>
+  </tbody>
+</table>
+<br>
+
+{% endif %}
+
+{% endblock %}

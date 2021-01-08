@@ -1,0 +1,13 @@
+textarea {
+    min-height: 400px;
+}
+
+.email {
+  border:2px solid black;
+  margin-bottom: 2px;
+  padding: 2px;
+}
+
+#mail-body{
+  white-space: pre-wrap;
+}

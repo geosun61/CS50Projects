@@ -1,0 +1,28 @@
+@import "header.scss";
+
+#profPic {
+  position: relative;
+  text-align: center;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  float: right;
+  padding-right: 65px;
+}
+
+.row {
+  margin-bottom: 5px;
+}
+
+.sensorsli {
+  float: right;
+}
+
+.aboutMe {
+  position: relative;
+  padding: 7px;
+
+  > h3 {
+    font-family: sans-serif;
+    color: rgb(100,40,100);
+  }
+}

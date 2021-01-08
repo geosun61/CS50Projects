@@ -1,0 +1,21 @@
+@import "header.scss";
+
+body {
+  h4 {
+    color: rgba(0, 26, 120, 0.75);
+  }
+
+  .container {
+    table {
+      tr {
+        .senfunc {
+          font-size: 15px;
+        }
+
+        .senImg {
+          width: 200px;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,17 @@
+.bccolor-orange{
+  background-color: #ff914d;
+}
+
+.checkedListItem{
+  background: #888;
+  color: rgb(255, 255, 255);
+  text-decoration: line-through;
+}
+
+.days-tasks-items:hover{
+  background: #888;
+}
+
+.days-tasks-items{
+  white-space: pre;
+}
